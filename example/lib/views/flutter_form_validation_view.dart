@@ -94,7 +94,7 @@ class _FlutterFormValidationViewState extends State<FlutterFormValidationView> {
         key: _formKey,
         autovalidateMode: AutovalidateMode.onUnfocus,
         child: Column(
-          mainAxisAlignment: .center,
+          mainAxisAlignment: MainAxisAlignment.center,
           spacing: 16,
           children: [
             Text(
@@ -147,7 +147,7 @@ class _FlutterFormValidationViewState extends State<FlutterFormValidationView> {
 
             Row(
               spacing: 8,
-              mainAxisAlignment: .center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(onPressed: _validate, child: Text("Validate")),
                 ElevatedButton(onPressed: _reset, child: Text("Reset")),

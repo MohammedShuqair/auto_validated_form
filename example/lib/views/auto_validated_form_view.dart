@@ -63,7 +63,7 @@ class _AutoValidatedFormViewState extends State<AutoValidatedFormView> {
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Column(
-          mainAxisAlignment: .center,
+          mainAxisAlignment: MainAxisAlignment.center,
           spacing: 16,
           children: [
             Text(
@@ -71,9 +71,9 @@ class _AutoValidatedFormViewState extends State<AutoValidatedFormView> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             AutoValidatedTextField(
+              key: const Key('name_field'),
               controller: _nameController,
               onTapOutside: _onTapOutSide,
-
               decoration: InputDecoration(
                 labelText: "Name",
                 border: OutlineInputBorder(),
@@ -89,9 +89,9 @@ class _AutoValidatedFormViewState extends State<AutoValidatedFormView> {
               },
             ),
             AutoValidatedTextField(
+              key: const Key('email_field'),
               controller: _emailController,
               onTapOutside: _onTapOutSide,
-
               decoration: InputDecoration(
                 labelText: "Email",
                 border: OutlineInputBorder(),
@@ -106,9 +106,11 @@ class _AutoValidatedFormViewState extends State<AutoValidatedFormView> {
                 if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
                   return 'Please enter a valid email address';
                 }
+                return null;
               },
             ),
             AutoValidatedTextField(
+              key: const Key('address_field'),
               controller: _addressController,
               onTapOutside: _onTapOutSide,
               decoration: InputDecoration(
@@ -125,16 +127,13 @@ class _AutoValidatedFormViewState extends State<AutoValidatedFormView> {
                 return null;
               },
             ),
-
             AutoValidatedFormBuilder(
-              builder: (_, Map<String, String> validationState, _, _) {
-                List<String> errorMessages = validationState.values
-                    .where((message) => message.isNotEmpty)
-                    .toList();
+              builder: (_, fields, __, ___) {
+                final errorMessages = fields.errorMessages;
                 return Align(
-                  alignment: .centerStart,
+                  alignment: AlignmentDirectional.centerStart,
                   child: Column(
-                    crossAxisAlignment: .start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       for (String message in errorMessages) ...[
                         Text(message, style: TextStyle(color: Colors.red)),
@@ -144,14 +143,14 @@ class _AutoValidatedFormViewState extends State<AutoValidatedFormView> {
                 );
               },
             ),
-
             Row(
               spacing: 8,
-              mainAxisAlignment: .center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AutoValidatedFormBuilder(
-                  builder: (_, _, isValid, child) {
+                  builder: (_, __, isValid, child) {
                     return ElevatedButton(
+                      key: const Key('validate_button'),
                       onPressed: () => _validate(isValid),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: isValid ? null : Colors.grey,
@@ -161,7 +160,11 @@ class _AutoValidatedFormViewState extends State<AutoValidatedFormView> {
                   },
                   child: Text("Validate"),
                 ),
-                ElevatedButton(onPressed: _reset, child: Text("Reset")),
+                ElevatedButton(
+                  key: const Key('reset_button'),
+                  onPressed: _reset,
+                  child: Text("Reset"),
+                ),
               ],
             ),
           ],
