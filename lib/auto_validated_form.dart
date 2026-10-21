@@ -1,5 +1,7 @@
 export "src/auto_validated_form_controller.dart";
 export 'src/auto_validation_notifier.dart';
+export 'src/extensions/field_model_map_extension.dart';
+export 'src/models/field_model.dart';
 export 'src/types.dart';
 export 'src/validation_state_tracker.dart';
 export 'src/widgets/auto_validated_field.dart';

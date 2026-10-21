@@ -2,7 +2,7 @@ import 'package:auto_validated_form/auto_validated_form.dart';
 import 'package:flutter/widgets.dart';
 
 class AutoValidatedFormScope extends InheritedWidget {
-  const new({
+  const AutoValidatedFormScope({
     super.key,
     required super.child,
     required this.validationStateTracker,
