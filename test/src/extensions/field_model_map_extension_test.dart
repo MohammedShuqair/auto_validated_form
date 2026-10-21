@@ -13,7 +13,8 @@ void main() {
       expect(map.errorMessages, equals(['Error 1', 'Error 3']));
     });
 
-    test('hasErrors returns true only when at least one field has an error', () {
+    test('hasErrors returns true only when at least one field has an error',
+        () {
       final mapWithErrors = {
         'f1': const FieldModel(id: 'f1', errorText: 'Error', validated: true),
         'f2': const FieldModel(id: 'f2', errorText: '', validated: true),
@@ -51,9 +52,11 @@ void main() {
 
     test('errorsMap returns map of only fields with active errors', () {
       final map = {
-        'name': const FieldModel(id: 'name', errorText: 'Required', validated: true),
+        'name': const FieldModel(
+            id: 'name', errorText: 'Required', validated: true),
         'email': const FieldModel(id: 'email', errorText: '', validated: true),
-        'age': const FieldModel(id: 'age', errorText: 'Must be 18+', validated: true),
+        'age': const FieldModel(
+            id: 'age', errorText: 'Must be 18+', validated: true),
       };
 
       expect(
@@ -69,7 +72,8 @@ void main() {
         'third': const FieldModel(id: 'third'),
       };
 
-      expect(map.fieldList.map((e) => e.id).toList(), equals(['first', 'second', 'third']));
+      expect(map.fieldList.map((e) => e.id).toList(),
+          equals(['first', 'second', 'third']));
     });
   });
 }

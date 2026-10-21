@@ -130,7 +130,6 @@ class _FlutterFormValidationViewState extends State<FlutterFormValidationView> {
                 return null;
               },
             ),
-
             TextFormField(
               decoration: InputDecoration(
                 labelText: "Address",
@@ -144,7 +143,6 @@ class _FlutterFormValidationViewState extends State<FlutterFormValidationView> {
                 return null;
               },
             ),
-
             Row(
               spacing: 8,
               mainAxisAlignment: MainAxisAlignment.center,
