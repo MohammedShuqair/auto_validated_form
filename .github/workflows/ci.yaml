@@ -1,0 +1,121 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze-and-format:
+    name: Code Quality & Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+          cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Verify code formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Run static analysis
+        run: flutter analyze --fatal-infos
+
+  test-and-coverage:
+    name: Unit & Widget Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run tests with coverage
+        run: flutter test --coverage
+
+      - name: Verify LCOV coverage report
+        run: |
+          if [ ! -f coverage/lcov.info ]; then
+            echo "Error: coverage/lcov.info was not generated."
+            exit 1
+          fi
+
+      - name: Generate Coverage Job Summary
+        run: |
+          echo "### Test & Coverage Results :white_check_mark:" >> $GITHUB_STEP_SUMMARY
+          echo "Coverage report generated at \`coverage/lcov.info\`." >> $GITHUB_STEP_SUMMARY
+          if which lcov > /dev/null 2>&1; then
+            lcov --summary coverage/lcov.info >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Archive Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/lcov.info
+          if-no-files-found: error
+
+  example-check:
+    name: Example App Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install example dependencies
+        working-directory: example
+        run: flutter pub get
+
+      - name: Analyze example project
+        working-directory: example
+        run: flutter analyze --fatal-infos
+
+      - name: Run example tests
+        working-directory: example
+        run: flutter test
+
+  publish-dry-run:
+    name: Package Publish Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Validate package for pub.dev
+        run: flutter pub publish --dry-run

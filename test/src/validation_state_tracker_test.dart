@@ -6,7 +6,8 @@ void main() {
     late ValidationStateTracker tracker;
 
     setUp(() {
-      tracker = ValidationStateTracker.defaultFalse(['name', 'email', 'address']);
+      tracker =
+          ValidationStateTracker.defaultFalse(['name', 'email', 'address']);
     });
 
     tearDown(() {
@@ -39,12 +40,15 @@ void main() {
       listTracker.dispose();
     });
 
-    test('transitions unvalidated field to validated=true on first valid input', () {
+    test('transitions unvalidated field to validated=true on first valid input',
+        () {
       // User types valid input on the very first try (error message is empty)
       tracker.validate('name', '');
 
       final field = tracker.formValidationNotifier.value['name']!;
-      expect(field.validated, isTrue, reason: 'Field must be marked validated even if errorText starts and stays empty');
+      expect(field.validated, isTrue,
+          reason:
+              'Field must be marked validated even if errorText starts and stays empty');
       expect(field.errorText, isEmpty);
       expect(field.isValid, isTrue);
     });
@@ -73,7 +77,9 @@ void main() {
       expect(tracker.isValid, isFalse);
     });
 
-    test('preserves original insertion order when fields are validated out-of-order', () {
+    test(
+        'preserves original insertion order when fields are validated out-of-order',
+        () {
       // Validate 'address' first, then 'name', then 'email'
       tracker.validate('address', '');
       tracker.validate('name', 'Name error');
@@ -81,7 +87,8 @@ void main() {
 
       final currentKeys = tracker.formValidationNotifier.value.keys.toList();
       expect(currentKeys, equals(['name', 'email', 'address']),
-          reason: 'Map must preserve initial insertion order regardless of update sequence');
+          reason:
+              'Map must preserve initial insertion order regardless of update sequence');
     });
 
     test('validationListener correctly invokes validate callback', () {
@@ -89,7 +96,8 @@ void main() {
       expect(listener, isNotNull);
 
       listener!('New error');
-      expect(tracker.formValidationNotifier.value['name']?.errorText, equals('New error'));
+      expect(tracker.formValidationNotifier.value['name']?.errorText,
+          equals('New error'));
     });
 
     test('reset reverts fields back to initial default state', () {

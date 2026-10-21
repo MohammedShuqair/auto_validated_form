@@ -16,11 +16,11 @@ class AutoValidatedFormScope extends InheritedWidget {
   }) {
     late AutoValidatedFormScope? provider;
     if (listen) {
-      provider = context
-          .dependOnInheritedWidgetOfExactType<AutoValidatedFormScope>();
+      provider =
+          context.dependOnInheritedWidgetOfExactType<AutoValidatedFormScope>();
     } else {
-      provider = context
-          .getInheritedWidgetOfExactType<AutoValidatedFormScope>();
+      provider =
+          context.getInheritedWidgetOfExactType<AutoValidatedFormScope>();
     }
     return provider;
   }

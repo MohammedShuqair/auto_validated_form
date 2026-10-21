@@ -4,7 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('AutoValidatedFormBuilder', () {
-    testWidgets('renders using inherited AutoValidatedFormScope and rebuilds on change', (tester) async {
+    testWidgets(
+        'renders using inherited AutoValidatedFormScope and rebuilds on change',
+        (tester) async {
       final tracker = ValidationStateTracker.defaultFalse(['email']);
 
       await tester.pumpWidget(
@@ -46,7 +48,9 @@ void main() {
       tracker.dispose();
     });
 
-    testWidgets('renders using explicit value notifier without AutoValidatedFormScope', (tester) async {
+    testWidgets(
+        'renders using explicit value notifier without AutoValidatedFormScope',
+        (tester) async {
       final notifier = ValueNotifier<Map<String, FieldModel>>({
         'name': const FieldModel(id: 'name', validated: true, errorText: ''),
       });
@@ -66,7 +70,9 @@ void main() {
       notifier.dispose();
     });
 
-    testWidgets('throws StateError when neither value nor AutoValidatedFormScope is provided', (tester) async {
+    testWidgets(
+        'throws StateError when neither value nor AutoValidatedFormScope is provided',
+        (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: AutoValidatedFormBuilder(
