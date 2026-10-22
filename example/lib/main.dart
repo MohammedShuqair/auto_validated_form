@@ -1,7 +1,5 @@
+import 'package:example/views/comparison_view.dart';
 import 'package:flutter/material.dart';
-
-import 'views/auto_validated_form_view.dart';
-import 'views/flutter_form_validation_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,23 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text("Form Validation"),
-        ),
-        body: SingleChildScrollView(
-          key: const Key("scroll_view"),
-          child: SafeArea(
-            child: Column(
-              children: const [
-                FlutterFormValidationView(),
-                AutoValidatedFormView(),
-              ],
-            ),
-          ),
-        ),
-      ),
+      home: ComparisonView(),
     );
   }
 }
