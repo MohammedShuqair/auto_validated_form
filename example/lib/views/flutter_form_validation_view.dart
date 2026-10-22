@@ -82,6 +82,14 @@ class _FlutterFormValidationViewState extends State<FlutterFormValidationView> {
   }
 
   @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _addressController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8.0),

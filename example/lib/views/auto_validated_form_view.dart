@@ -52,6 +52,15 @@ class _AutoValidatedFormViewState extends State<AutoValidatedFormView> {
   }
 
   @override
+  void dispose() {
+    validationStateTracker.dispose();
+    _nameController.dispose();
+    _emailController.dispose();
+    _addressController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AutoValidatedFormScope(
       validationStateTracker: validationStateTracker,
