@@ -2,6 +2,9 @@
 
 A reactive, granular, and boilerplate-free form validation package for Flutter.
 
+## Note
+This package is still under development, so if you're looking for a more mature and reliable solution with similar functionality, take a look at [reactive_forms](https://pub.dev/packages/reactive_forms).
+
 [![pub package](https://img.shields.io/pub/v/auto_validated_form.svg)](https://pub.dev/packages/auto_validated_form)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/MohammedShuqair/auto_validated_form/blob/main/LICENSE)
 [![style: flutter_lints](https://img.shields.io/badge/style-flutter__lints-40c4ff.svg)](https://pub.dev/packages/flutter_lints)
