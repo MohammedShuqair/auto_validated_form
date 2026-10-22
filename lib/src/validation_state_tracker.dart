@@ -4,7 +4,7 @@ import 'extensions/field_model_map_extension.dart';
 import 'models/field_model.dart';
 import 'types.dart';
 
-/// Tracks the validation state of all form fields in an [AutoValidatedForm].
+/// Tracks the validation state of all form fields in an [AutoValidatedFormScope].
 class ValidationStateTracker {
   /// Stores [ValidationListener] for each field registered with [ValidationStateTracker].
   final Map<String, ValidationListener> _listeners = {};

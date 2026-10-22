@@ -5,7 +5,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// A drop-in replacement for Flutter's [TextField] that handles the auto-validation lifecycle.
 class AutoValidatedTextField extends StatelessWidget {
+  /// Creates an [AutoValidatedTextField].
   const AutoValidatedTextField({
     super.key,
     required this.controller,
@@ -71,7 +73,6 @@ class AutoValidatedTextField extends StatelessWidget {
     this.stylusHandwritingEnabled =
         EditableText.defaultStylusHandwritingEnabled,
     this.enableIMEPersonalizedLearning = true,
-    this.enableInlinePrediction,
     this.contextMenuBuilder,
     this.canRequestFocus = true,
     this.spellCheckConfiguration,
@@ -143,7 +144,6 @@ class AutoValidatedTextField extends StatelessWidget {
   final String? restorationId;
   final bool stylusHandwritingEnabled;
   final bool enableIMEPersonalizedLearning;
-  final bool? enableInlinePrediction;
   final ContentInsertionConfiguration? contentInsertionConfiguration;
   final EditableTextContextMenuBuilder? contextMenuBuilder;
   final bool canRequestFocus;
@@ -235,7 +235,6 @@ class AutoValidatedTextField extends StatelessWidget {
           restorationId: restorationId,
           stylusHandwritingEnabled: stylusHandwritingEnabled,
           enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
-          enableInlinePrediction: enableInlinePrediction,
           contextMenuBuilder: contextMenuBuilder,
           canRequestFocus: canRequestFocus,
           spellCheckConfiguration: spellCheckConfiguration,

@@ -1,5 +1,5 @@
 name: auto_validated_form
-description: "A new Flutter package for custom auto validated form"
+description: "A Flutter package for reactive, granular form validation with smart timing, state tracking, and selective widget rebuilding."
 version: 0.0.1
 repository: https://github.com/MohammedShuqair/auto_validated_form
 

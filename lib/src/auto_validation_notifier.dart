@@ -2,16 +2,30 @@ import 'package:flutter/material.dart';
 
 import 'types.dart';
 
+/// A [ChangeNotifier] that coordinates the validation timing and lifecycle for an individual field.
 class AutoValidationNotifier extends ChangeNotifier {
+  /// The [TextEditingController] being monitored.
   TextEditingController controller;
+
+  /// The validator function to evaluate the input.
   String? Function(String?)? validator;
+
+  /// The current error text, or an empty string if valid.
   String errorText = '';
+
+  /// Optional listener notified when validation changes.
   final ValidationListener? validationListener;
+
+  /// The [FocusNode] used to detect focus/blur events.
   final FocusNode focusNode;
+
+  /// The previous text value before modification.
   String lastVal = '';
 
+  /// Whether the field currently has an active validation error.
   bool get hasValidationError => errorText.isNotEmpty;
 
+  /// Creates an [AutoValidationNotifier].
   AutoValidationNotifier({
     required this.focusNode,
     required this.controller,
