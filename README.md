@@ -13,7 +13,7 @@ This package is still under development, so if you're looking for a more mature 
 
 ## Demo
 
-<p align="center">
+<p style="text-align: center;">
   <img src="https://github.com/MohammedShuqair/auto_validated_form/blob/main/assets/demo.gif?raw=true" alt="Auto Validated Form Demo" width="380" />
 </p>
 
