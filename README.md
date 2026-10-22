@@ -14,8 +14,7 @@ This package is still under development, so if you're looking for a more mature 
 ## Demo
 
 <p align="center">
-  <!-- Replace this URL with your hosted GIF or repository asset path (e.g., assets/demo.gif) -->
-  <img src="https://raw.githubusercontent.com/MohammedShuqair/auto_validated_form/main/assets/demo.gif" alt="Auto Validated Form Demo" width="380" />
+  <img src="https://github.com/MohammedShuqair/auto_validated_form/blob/main/assets/demo.gif?raw=true" alt="Auto Validated Form Demo" width="380" />
 </p>
 
 ---
@@ -73,8 +72,8 @@ import 'package:auto_validated_form/auto_validated_form.dart';
 Setting up an auto-validated form takes 4 easy steps:
 
 ```dart
-import 'package:flutter/material.dart';
 import 'package:auto_validated_form/auto_validated_form.dart';
+import 'package:flutter/material.dart';
 
 class QuickStartForm extends StatefulWidget {
   const QuickStartForm({super.key});
@@ -106,49 +105,59 @@ class _QuickStartFormState extends State<QuickStartForm> {
   @override
   Widget build(BuildContext context) {
     // 2. Wrap your form in AutoValidatedFormScope
-    return AutoValidatedFormScope(
-      validationStateTracker: _tracker,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            // 3. Use AutoValidatedTextField
-            AutoValidatedTextField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-              validationListener: _tracker.validationListener('email'),
-              validator: (value) {
-                if (value == null || !value.contains('@')) {
-                  return 'Please enter a valid email';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 16),
-            AutoValidatedTextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Password'),
-              validationListener: _tracker.validationListener('password'),
-              validator: (value) {
-                if (value == null || value.length < 6) {
-                  return 'Password must be at least 6 characters';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 24),
-            // 4. Reactively enable the submit button
-            AutoValidatedFormBuilder(
-              builder: (context, fields, isValid, child) {
-                return ElevatedButton(
-                  onPressed: isValid ? _submit : null,
-                  child: child!,
-                );
-              },
-              child: const Text('Submit'),
-            ),
-          ],
+    return Scaffold(
+      body: AutoValidatedFormScope(
+        validationStateTracker: _tracker,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              // 3. Use AutoValidatedTextField
+              AutoValidatedTextField(
+                controller: _emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
+                validationListener: _tracker.validationListener('email'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                    return 'Please enter a valid email address';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              AutoValidatedTextField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(labelText: 'Password'),
+                validationListener: _tracker.validationListener('password'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  if (value.length < 6) {
+                    return 'Password must be at least 6 characters';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 24),
+              // 4. Reactively enable the submit button
+              AutoValidatedFormBuilder(
+                builder: (context, fields, isValid, child) {
+                  return ElevatedButton(
+                    onPressed: isValid ? _submit : null,
+                    child: child!,
+                  );
+                },
+                child: const Text('Submit'),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -160,6 +169,7 @@ class _QuickStartFormState extends State<QuickStartForm> {
     );
   }
 }
+
 ```
 
 ---
